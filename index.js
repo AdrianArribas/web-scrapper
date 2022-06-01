@@ -21,7 +21,7 @@ const shops = [
 		checkStock: async ({ page, vendor }) => {
 			const content = await page.textContent('[aria-label="Finalizar la compra del pack"]') // comprobamos que una parte caracteristica del elemento a observar existe
 			const hasStock = content.includes('Sin existencias') === false // miramos el contenido del elemento
-			const namePhoto = (vendor + '.png')
+			const namePhoto = ('screenshots/' + vendor + '.png')
 			await page.screenshot({ path: namePhoto })
 			return hasStock
 		}
@@ -30,9 +30,9 @@ const shops = [
 		vendor: 'Game',
 		url: 'https://www.game.es/HARDWARE/PACK-CONSOLA/PACKS/XBOX-ALL-ACCESS-XBOX-SERIES-X/195998',
 		checkStock: async ({ page, vendor }) => {
-			const content = await page.textContent('.product-quick-actions') // comprobamos que una parte caracteristica del elemento a observar existe
-			const hasStock = content.includes('Producto no disponible') === false // miramos el contenido del elemento
-			const namePhoto = (vendor + '.png')
+			const content = await page.textContent('.product-quick-actions')
+			const hasStock = content.includes('Producto no disponible') === false
+			const namePhoto = ('screenshots/' + vendor + '.png')
 			await page.screenshot({ path: namePhoto })
 			return hasStock
 		}
@@ -41,9 +41,9 @@ const shops = [
 		vendor: 'MediaMarkt',
 		url: 'https://www.mediamarkt.es/es/product/_consola-microsoft-xbox-series-x-1-tb-ssd-negro-1487615.html',
 		checkStock: async ({ page, vendor }) => {
-			const content = await page.textContent('.product-quick-actions') // comprobamos que una parte caracteristica del elemento a observar existe
-			const hasStock = content.includes('Producto no disponible') === false // miramos el contenido del elemento
-			const namePhoto = (vendor + '.png')
+			const content = await page.textContent('[data-product-online-status="CURRENTLY_NOT_AVAILABLE"]')
+			const hasStock = content.includes('Este artículo no está disponible actualmente.') === false
+			const namePhoto = ('screenshots/' + vendor + '.png')
 			await page.screenshot({ path: namePhoto })
 			return hasStock
 		}
@@ -61,8 +61,8 @@ const shops = [
 		await page.goto(url)
 		const hasStock = await checkStock({ page, vendor })
 		console.log(`${vendor}: ${hasStock ? 'DISPONIBLE !!! 😍' : 'no disponible 😢'}`)
-		await page.close()
 	}
+	await page.close()
 
 	// creamos un promise.all que recorrera la funcion contenida en el metodo checkStock de cada buscqueda del array shops y esperará a que todo haya acabado
 	/* 	const results = await Promise.all(
