@@ -1,0 +1,21 @@
+{
+  "name": "scrapper",
+  "version": "1.0.0",
+  "description": "scrapper for monitoring items on the web",
+  "main": "index.js",
+  "scripts": {
+    "test": "test-app"
+  },
+  "author": "Adrian Arribas",
+  "license": "ISC",
+  "devDependencies": {
+    "playwright": "^1.22.2",
+    "standard": "^17.0.0"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.22.2"
+  }
+}
